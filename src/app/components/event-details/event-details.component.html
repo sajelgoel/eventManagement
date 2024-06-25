@@ -1,0 +1,75 @@
+<div class="d-flex justify-content-center">
+  <form
+    *ngIf="eventForm"
+    [formGroup]="eventForm"
+    (ngSubmit)="onSubmit()"
+    class="col-md-4 col-10"
+  >
+    <div class="mt-2">
+      <label class="form-label" for="title">Title:</label>
+      <input class="form-control" id="title" formControlName="title" />
+      <div
+        *ngIf="
+          eventForm.get('title')?.invalid && eventForm.get('title')?.touched
+        "
+      >
+        Title is required.
+      </div>
+    </div>
+
+    <div class="mt-2">
+      <label class="form-label" for="location">Location:</label>
+      <input class="form-control" id="location" formControlName="location" />
+      <div
+        *ngIf="
+          eventForm.get('location')?.invalid &&
+          eventForm.get('location')?.touched
+        "
+      >
+        Location is required.
+      </div>
+    </div>
+
+    <div class="mt-2">
+      <label class="form-label" for="date">Date:</label>
+      <input
+        class="form-control"
+        id="date"
+        type="date"
+        formControlName="date"
+      />
+      <div
+        *ngIf="eventForm.get('date')?.invalid && eventForm.get('date')?.touched"
+      >
+        Date is required.
+      </div>
+    </div>
+
+    <div class="mt-2">
+      <label class="form-label" for="description">Description:</label>
+      <textarea
+        class="form-control"
+        id="description"
+        formControlName="description"
+      ></textarea>
+      <div
+        *ngIf="
+          eventForm.get('description')?.invalid &&
+          eventForm.get('description')?.touched
+        "
+      >
+        Description is required.
+      </div>
+    </div>
+    <div class="d-flex justify-content-evenly">
+      <button
+        type="submit"
+        class="btn btn-primary mt-4"
+        [ngClass]="{ disabled: !eventForm.valid }"
+      >
+        {{ add ? "Submit" : "Edit" }}
+      </button>
+      <button class="btn btn-primary mt-4" routerLink="">Back</button>
+    </div>
+  </form>
+</div>

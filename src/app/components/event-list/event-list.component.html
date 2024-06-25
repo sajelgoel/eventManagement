@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="d-flex justify-content-evenly">
+    <button class="btn btn-primary" routerLink="add">Add</button>
+    <input
+      type="text"
+      class="form-control w-25"
+      id="search-text"
+      aria-describedby="search-text"
+      [(ngModel)]="searchText"
+      placeholder="Enter text to search"
+    />
+  </div>
+
+  <div
+    *ngFor="let event of events | appFilter : searchText"
+    class="row border mt-4 mb-4 rounded p-2"
+  >
+    <div class="col-9">
+      <div>Title: {{ event.title }}</div>
+      <div>Location: {{ event.location }}</div>
+      <div>Description: {{ event.description }}</div>
+    </div>
+    <div
+      class="col-3 d-flex flex-md-row flex-column justify-content-evenly align-items-center"
+    >
+      <button class="btn btn-danger" (click)="deleteEvent(event.id)">
+        Delete
+      </button>
+      <button class="btn btn-primary" routerLink="edit/{{ event.id }}">
+        Edit
+      </button>
+    </div>
+  </div>
+
+  <div
+    *ngIf="!events.length"
+    class="mt-4 mb-4 p-2 d-flex justify-content-evenly align-items-center"
+  >
+    No upcoming events
+  </div>
+</div>
